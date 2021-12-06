@@ -20,12 +20,14 @@ const Users = () => {
       );
     }
     if (number === 11 || number === 12 || number === 13 || number === 14) {
-      <h2>
-        <span className="badge bg-primary">
-          {number} человек тусанет с тобой сегодня{" "}
-        </span>
-        ;
-      </h2>;
+      return (
+        <h2>
+          <span className="badge bg-primary">
+            {number} человек тусанет с тобой сегодня{" "}
+          </span>
+          ;
+        </h2>
+      );
     }
     if (number % 10 === 2 || number % 10 === 3 || number % 10 === 4) {
       return (
