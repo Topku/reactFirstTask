@@ -1,93 +1,21 @@
-import React, { useState } from "react";
-import api from "../api";
+import React from "react";
+import User from "./user";
 import "bootstrap/dist/css/bootstrap.css";
 
-const Users = () => {
-  const [users, setUsers] = useState(api.users.fetchAll());
+const Users = (users) => {
+  let usersArray = Object.values(users);
 
-  const handleDelete = (userId) => {
-    setUsers((prevState) => prevState.filter((users) => users !== userId));
+  const handleBookmark = (id) => {
+    console.log(id);
   };
 
-  const renderPhrase = (number) => {
-    if (number % 10 === 1) {
-      return (
-        <h2>
-          <span className="badge bg-primary">
-            {number} человек тусанет с тобой сегодня{" "}
-          </span>
-        </h2>
-      );
-    }
-    if (number === 11 || number === 12 || number === 13 || number === 14) {
-      return (
-        <h2>
-          <span className="badge bg-primary">
-            {number} человек тусанет с тобой сегодня{" "}
-          </span>
-          ;
-        </h2>
-      );
-    }
-    if (number % 10 === 2 || number % 10 === 3 || number % 10 === 4) {
-      return (
-        <h2>
-          <span className="badge bg-primary">
-            {number} человека тусанет с тобой сегодня{" "}
-          </span>
-        </h2>
-      );
-    }
-    return (
-      <h2>
-        <span className="badge bg-primary">
-          {number} человек тусанет с тобой сегодня{" "}
-        </span>
-      </h2>
-    );
+  const handleDelete = (id) => {
+    console.log(id);
   };
 
-  const renderQualities = (qualities) => {
-    return qualities.map((qualitie) => (
-      <span key={qualitie.name} className={getBadgeClasses(qualitie)}>
-        {qualitie.name}
-      </span>
-    ));
-  };
-
-  const getBadgeClasses = (color) => {
-    let classes = "badge m-2 ";
-    classes += "bg-";
-    classes += color.color;
-    return classes;
-  };
-
-  const renderUsers = () => {
-    return (
-      users.length !== 0 &&
-      users.map((user) => (
-        <tr key={user.name}>
-          <td>{user.name}</td>
-          <td>{renderQualities(user.qualities)}</td>
-          <td>{user.profession.name}</td>
-          <td>{user.completedMeetings}</td>
-          <td>{user.rate}</td>
-          <td>
-            <button
-              className="btn btn-danger btn-sm m-2"
-              onClick={() => handleDelete(user)}
-            >
-              delete
-            </button>
-          </td>
-        </tr>
-      ))
-    );
-  };
-  if (users.length != 0) {
+  if (usersArray.length !== 0) {
     return (
       <div>
-        {renderPhrase(users.length)}
         <table className="table">
           <thead>
             <tr>
@@ -96,8 +24,16 @@ const Users = () => {
               <th scope="col">Профессия</th>
               <th scope="col">Встретился, раз</th>
               <th scope="col">Оценка</th>
+              <th scope="col">Избранное</th>
             </tr>
-            {renderUsers()}
+            {usersArray.map((user) => (
+              <User
+                key={user._id}
+                handleBookmark={handleBookmark}
+                handleDelete={handleDelete}
+                {...user}
+              />
+            ))}
           </thead>
           <tbody></tbody>
         </table>
