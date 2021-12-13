@@ -2,18 +2,8 @@ import React from "react";
 import User from "./user";
 import "bootstrap/dist/css/bootstrap.css";
 
-const Users = (users) => {
-  console.log(users);
-
+const Users = ({ users, onDelete, onToggleBookMark }) => {
   let usersArray = Object.values(users);
-
-  const handleBookmark = (id) => {
-    console.log(id);
-  };
-
-  const handleDelete = (id) => {
-    console.log(id);
-  };
 
   if (usersArray.length !== 0) {
     return (
@@ -31,8 +21,8 @@ const Users = (users) => {
             {usersArray.map((user) => (
               <User
                 key={user._id}
-                handleBookmark={handleBookmark}
-                handleDelete={handleDelete}
+                handleBookmark={onToggleBookMark}
+                handleDelete={onDelete}
                 {...user}
               />
             ))}

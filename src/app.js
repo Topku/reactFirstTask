@@ -4,10 +4,10 @@ import api from "./api";
 import SearchStatus from "./components/searchstatus";
 
 function App() {
-  const [users, setUsers] = useState(api.users.fetchAll());
+  let [users, setUsers] = useState(api.users.fetchAll());
 
   const handleDelete = (userId) => {
-    setUsers((prevState) => prevState.filter((users) => users !== userId));
+    setUsers((prevState) => prevState.filter((users) => users._id !== userId));
   };
   const handleBookmark = (id) => {
     console.log(id);
@@ -16,7 +16,11 @@ function App() {
     return (
       <>
         <SearchStatus key={users._id} number={users.length} />
-        <Users {...users} />
+        <Users
+          onDelete={handleDelete}
+          onToggleBookMark={handleBookmark}
+          users={users}
+        />
       </>
     );
   }
