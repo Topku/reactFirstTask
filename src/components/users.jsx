@@ -3,6 +3,8 @@ import User from "./user";
 import "bootstrap/dist/css/bootstrap.css";
 
 const Users = (users) => {
+  console.log(users);
+
   let usersArray = Object.values(users);
 
   const handleBookmark = (id) => {

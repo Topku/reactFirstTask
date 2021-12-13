@@ -4,10 +4,6 @@ import Bookmark from "./bookmark";
 import "bootstrap/dist/css/bootstrap.css";
 
 const User = (props) => {
-  const handleBookmark = (id) => {
-    console.log(id);
-  };
-
   return (
     <tr key={props.name}>
       <td>{props.name}</td>
@@ -24,7 +20,7 @@ const User = (props) => {
         _id={props._id}
         name={props.name}
         bookmark={props.bookmark}
-        handleBookmark={handleBookmark}
+        handleBookmark={props.handleBookmark}
       />
       <td>
         <button
