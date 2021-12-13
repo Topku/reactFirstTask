@@ -10,7 +10,12 @@ function App() {
     setUsers((prevState) => prevState.filter((users) => users._id !== userId));
   };
   const handleBookmark = (id) => {
-    console.log(id);
+    users.map(function (user) {
+      if (user._id === id) {
+        user.bookmark = !user.bookmark;
+      }
+    });
+    setUsers((prevState) => prevState.filter((users) => users.name !== id));
   };
   if (users.length !== 0) {
     return (
